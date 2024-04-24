@@ -25,6 +25,14 @@ def main():
     else:
         sys.exit('Valid operator names (add, subtract, multiply, divide)')
 
-
+    application = QApplication([])
+    window = Logic()
+    window.show()
+    application.exec()
 if __name__ == '__main__':
     main()
+
+
+
+
+

@@ -1,7 +1,5 @@
-import formulas
-import sys
-
-
+from formulas import *
+from logic import *
 def main():
     terminal = sys.argv
 
@@ -29,10 +27,7 @@ def main():
     window = Logic()
     window.show()
     application.exec()
+
+
 if __name__ == '__main__':
     main()
-
-
-
-
-

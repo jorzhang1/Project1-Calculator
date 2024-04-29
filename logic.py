@@ -7,7 +7,6 @@ class Logic(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-
         #numbers
         self.push_one.clicked.connect(self.num_clicked)
         self.push_two.clicked.connect(self.num_clicked)
@@ -36,7 +35,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 if '.' in self.current_input:
                     raise ValueError
 
-                if self.push_one:
+                if self.push_one.clicked:
                     self.current_input.append(1)
                 elif self.push_two:
                     self.current_input.append(2)
@@ -55,11 +54,9 @@ class Logic(QMainWindow, Ui_MainWindow):
                 elif self.push_nine:
                     self.current_input.append(9)
 
-                self.ans_label.setText("".join(self.current_input))
+                self.ans_label.setText("".join(str(self.current_input)))
             except ValueError:
                 print("hi")
-                break
-
 
     def calculate(self):
         pass
@@ -67,8 +64,6 @@ class Logic(QMainWindow, Ui_MainWindow):
     def submit(self):
         pass
 
-
-
-
     def clear_input(self):
         pass
+

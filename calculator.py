@@ -162,7 +162,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.top_label.setText(_translate("MainWindow", "Calculator"))
-        self.ans_label.setText(_translate("MainWindow", "HOLAAAAAAAAAAAAAAAAAAA"))
+        self.ans_label.setText(_translate("MainWindow", ""))
         self.push_seven.setText(_translate("MainWindow", "7"))
         self.push_four.setText(_translate("MainWindow", "4"))
         self.push_one.setText(_translate("MainWindow", "1"))

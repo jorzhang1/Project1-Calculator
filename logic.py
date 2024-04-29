@@ -31,11 +31,19 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.current_input = []
 
     def num_clicked(self):
-        self.current_input.append(float(self.sender().text()))
+        if self.push_one:
+            self.current_input.append(1)
+        if self.push_two:
+            self.current_input.append(2)
+        if self.push_three:
+            self.current_input.append(3)
         self.ans_label.setText("".join(self.current_input))
 
     def calculate(self):
-        
+        pass
+
+    def submit(self):
+        pass
 
 
 

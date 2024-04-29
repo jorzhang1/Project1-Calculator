@@ -35,6 +35,9 @@ class Logic(QMainWindow, Ui_MainWindow):
         button = self.sender()
         number = button.text()
 
+        if number.isdigit() or number == '.':
+            self.push_clear.setText("C")
+
         if number == '.':
             if '.' not in self.current_input:
                 self.current_input.append(number)

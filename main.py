@@ -1,5 +1,7 @@
-from formulas import *
-from logic import *
+import formulas
+import logic
+
+
 def main():
     terminal = sys.argv
 

@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="uno">
+    <file>logo_uno.png</file>
+  </qresource>
+</RCC>

@@ -143,7 +143,7 @@ class Ui_MainWindow(object):
         self.logo.setStyleSheet("background-image:url(:/uno/logo_uno.png)\n"
 "")
         self.logo.setText("")
-        self.logo.setPixmap(QtGui.QPixmap(":/uno/logo_uno.png"))
+        self.logo.setPixmap(QtGui.QPixmap("logo_uno.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         MainWindow.setCentralWidget(self.centralwidget)

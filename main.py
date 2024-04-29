@@ -1,5 +1,5 @@
-import formulas
-import logic
+from gui import *
+from logic import *
 
 
 def main():

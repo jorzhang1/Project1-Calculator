@@ -58,4 +58,6 @@ class Logic(QMainWindow, Ui_MainWindow):
 
 
     def clear_input(self):
-        pass
+        if "+" not in self.current_input:
+            self.current_input = []
+            self.ans_label.setText("")

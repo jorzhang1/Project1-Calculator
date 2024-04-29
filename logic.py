@@ -31,12 +31,27 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.current_input = []
 
     def num_clicked(self):
+        if len(self.current_input) < 1:
+
         if self.push_one:
             self.current_input.append(1)
-        if self.push_two:
+        elif self.push_two:
             self.current_input.append(2)
-        if self.push_three:
+        elif self.push_three:
             self.current_input.append(3)
+        elif self.push_four:
+            self.current_input.append(4)
+        elif self.push_five:
+            self.current_input.append(5)
+        elif self.push_six:
+            self.current_input.append(6)
+        elif self.push_seven:
+            self.current_input.append(7)
+        elif self.push_eight:
+            self.current_input.append(8)
+        elif self.push_nine:
+            self.current_input.append(9)
+
         self.ans_label.setText("".join(self.current_input))
 
     def calculate(self):

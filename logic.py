@@ -18,6 +18,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.push_seven.clicked.connect(self.num_clicked)
         self.push_eight.clicked.connect(self.num_clicked)
         self.push_nine.clicked.connect(self.num_clicked)
+        self.push_decimal.clicked.connect(self.num_clicked)
 
         #operators
         self.push_divide.clicked.connect(self.calculate)
@@ -31,34 +32,17 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.current_input = []
 
     def num_clicked(self):
-        while True:
-            try:
-                if '.' in self.current_input:
-                    raise ValueError
+        button = self.sender()
+        number = button.text()
 
-                if self.push_one:
-                    self.current_input.append(1)
-                elif self.push_two:
-                    self.current_input.append(2)
-                elif self.push_three:
-                    self.current_input.append(3)
-                elif self.push_four:
-                    self.current_input.append(4)
-                elif self.push_five:
-                    self.current_input.append(5)
-                elif self.push_six:
-                    self.current_input.append(6)
-                elif self.push_seven:
-                    self.current_input.append(7)
-                elif self.push_eight:
-                    self.current_input.append(8)
-                elif self.push_nine:
-                    self.current_input.append(9)
+        if number == '.':
+            if '.' not in self.current_input:
+                self.current_input.append(number)
+        else:
+            self.current_input.append(int(number))
 
-                self.ans_label.setText("".join(self.current_input))
-            except ValueError:
-                print("hi")
-                break
+        ans = "".join(map(str, self.current_input))
+        self.ans_label.setText(ans)
 
 
     def calculate(self):

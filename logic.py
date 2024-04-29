@@ -7,7 +7,6 @@ class Logic(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-
         #numbers
         self.push_one.clicked.connect(self.num_clicked)
         self.push_two.clicked.connect(self.num_clicked)
@@ -43,7 +42,7 @@ class Logic(QMainWindow, Ui_MainWindow):
 
         ans = "".join(map(str, self.current_input))
         self.ans_label.setText(ans)
-
+        print(self.current_input)
 
     def calculate(self):
         pass
@@ -51,8 +50,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     def submit(self):
         pass
 
-
-
-
     def clear_input(self):
-        pass
+        if '+' not in self.current_input:
+            self.current_input = []
+            self.ans_label.setText("")

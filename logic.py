@@ -48,17 +48,35 @@ class Logic(QMainWindow, Ui_MainWindow):
         print(self.current_input)
 
     def calculate(self):
-        pass
+        button = self.sender()
+        operation = button.text()
+
+        if type(self.current_input[-1]) is int:
+            self.current_input.append(operation)
+            print(self.current_input)
 
     def submit(self):
         pass
 
     def clear_input(self):
-#<<<<<<< HEAD
-        if "+" not in self.current_input:
-#=======
-        if ('+' not in self.current_input or '-' not in self.current_input or '/' not in self.current_input or '*'
-                not in self.current_input):
-#>>>>>>> bce0817ed2997f042515683e213d231044cbd8c5
+        operators = ['×','−','+','÷']
+        has_operator = any(op in self.current_input for op in operators)
+
+        if not has_operator:
             self.current_input = []
             self.ans_label.setText("")
+        elif type(self.current_input[-1]) is str:
+            self.current_input.pop()
+            ans = "".join(map(str, self.current_input))
+            self.ans_label.setText(ans)
+            print(self.current_input)
+        else:
+            for i in reversed(self.current_input):
+                if type(i) is not str:
+                    self.current_input.pop()
+                else:
+                    break
+            ans = "".join(map(str, self.current_input))
+            self.ans_label.setText(ans)
+            print(self.current_input)
+

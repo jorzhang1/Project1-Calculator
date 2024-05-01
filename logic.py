@@ -6,6 +6,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.operators = ['×', '−', '+', '÷']
 
         #numbers
         self.push_one.clicked.connect(self.num_clicked)
@@ -37,11 +38,17 @@ class Logic(QMainWindow, Ui_MainWindow):
         if number.isdigit() or number == '.':
             self.push_clear.setText("C")
 
-        if number == '.':
-            if '.' not in self.current_input:
+            if number == '.':
+                if '.' not in self.current_input:
+                    self.current_input.append(number)
+            else:
                 self.current_input.append(number)
-        else:
-            self.current_input.append(int(number))
+
+            if any(op in self.current_input for op in self.operators):
+                return
+
+            if len(self.current_input) > 1:
+                self.current_input = [''.join(self.current_input)]
 
         ans = "".join(map(str, self.current_input))
         self.ans_label.setText(ans)
@@ -51,20 +58,21 @@ class Logic(QMainWindow, Ui_MainWindow):
         button = self.sender()
         operation = button.text()
         if len(self.current_input) > 0:
-            if type(self.current_input[-1]) is int:
-                self.current_input.append(operation)
-                print(self.current_input)
+            self.current_input[0] = float(self.current_input[0])
+
+            self.current_input.append(operation)
+            print(self.current_input)
 
     def submit(self):
         pass
 
     def clear_input(self):
-        operators = ['×','−','+','÷']
-        has_operator = any(op in self.current_input for op in operators)
+        has_operator = any(op in self.current_input for op in self.operators)
 
         if not has_operator:
             self.current_input = []
             self.ans_label.setText("")
+            self.push_clear.setText("A/C")
         elif type(self.current_input[-1]) is str:
             self.current_input.pop()
             ans = "".join(map(str, self.current_input))
@@ -79,4 +87,3 @@ class Logic(QMainWindow, Ui_MainWindow):
             ans = "".join(map(str, self.current_input))
             self.ans_label.setText(ans)
             print(self.current_input)
-

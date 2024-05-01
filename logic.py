@@ -50,10 +50,10 @@ class Logic(QMainWindow, Ui_MainWindow):
     def calculate(self):
         button = self.sender()
         operation = button.text()
-
-        if type(self.current_input[-1]) is int:
-            self.current_input.append(operation)
-            print(self.current_input)
+        if len(self.current_input) > 0:
+            if type(self.current_input[-1]) is int:
+                self.current_input.append(operation)
+                print(self.current_input)
 
     def submit(self):
         pass

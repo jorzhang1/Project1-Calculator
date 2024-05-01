@@ -59,7 +59,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         pass
 
     def clear_input(self):
-        operators = ['×','−','+','÷']
+        operators = ['×', '−', '+', '÷']
         has_operator = any(op in self.current_input for op in operators)
 
         if not has_operator:
@@ -79,4 +79,3 @@ class Logic(QMainWindow, Ui_MainWindow):
             ans = "".join(map(str, self.current_input))
             self.ans_label.setText(ans)
             print(self.current_input)
-

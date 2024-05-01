@@ -29,6 +29,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.push_clear.clicked.connect(self.clear_input)
 
         self.current_input = []
+        self.total_input = []
 
     def num_clicked(self):
         button = self.sender()
@@ -39,43 +40,45 @@ class Logic(QMainWindow, Ui_MainWindow):
 
         if number == '.':
             if '.' not in self.current_input:
+                self.total_input.append(number)
                 self.current_input.append(number)
         else:
+            self.total_input.append(int(number))
             self.current_input.append(int(number))
 
-        ans = "".join(map(str, self.current_input))
+        ans = "".join(map(str, self.total_input))
         self.ans_label.setText(ans)
-        print(self.current_input)
 
     def calculate(self):
         button = self.sender()
         operation = button.text()
-        if len(self.current_input) > 0:
-            if type(self.current_input[-1]) is int:
-                self.current_input.append(operation)
-                print(self.current_input)
+        self.current_input = [operation]
+
+        if len(self.total_input) > 0:
+            if type(self.total_input[-1]) is int:
+                self.total_input.append(operation)
+                ans = "".join(map(str, self.total_input))
+                self.ans_label.setText(ans)
 
     def submit(self):
         pass
 
     def clear_input(self):
         operators = ['×', '−', '+', '÷']
-        has_operator = any(op in self.current_input for op in operators)
+        has_operator = any(op in self.total_input for op in operators)
 
         if not has_operator:
-            self.current_input = []
+            self.total_input = []
             self.ans_label.setText("")
-        elif type(self.current_input[-1]) is str:
-            self.current_input.pop()
-            ans = "".join(map(str, self.current_input))
+        elif type(self.total_input[-1]) is str:
+            self.total_input.pop()
+            ans = "".join(map(str, self.total_input))
             self.ans_label.setText(ans)
-            print(self.current_input)
         else:
-            for i in reversed(self.current_input):
+            for i in reversed(self.total_input):
                 if type(i) is not str:
-                    self.current_input.pop()
+                    self.total_input.pop()
                 else:
                     break
-            ans = "".join(map(str, self.current_input))
+            ans = "".join(map(str, self.total_input))
             self.ans_label.setText(ans)
-            print(self.current_input)

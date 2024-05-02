@@ -51,17 +51,10 @@ class Logic(QMainWindow, Ui_MainWindow):
         if number.isdigit() or number == '.':
             self.push_clear.setText("C")
 
-            if number == '.':
-                if '.' not in self.current_input:
-                    self.current_input.append(number)
-            else:
+            if not self.current_input or self.current_input[-1] in self.operators:
                 self.current_input.append(number)
-
-            if any(op in self.current_input for op in self.operators):
-                return
-
-            if len(self.current_input) > 1:
-                self.current_input = [''.join(self.current_input)]
+            else:
+                self.current_input[-1] += number
 
         ans = "".join(map(str, self.current_input))
         self.ans_label.setText(ans)

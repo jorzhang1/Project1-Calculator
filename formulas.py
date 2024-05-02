@@ -4,7 +4,7 @@ import sys
 def add(values):
     sum = 0
     for i in values:
-        if i < 0:
+        if i > 0:
             sum += i
     return sum
 

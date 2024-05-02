@@ -83,6 +83,15 @@ class Logic(QMainWindow, Ui_MainWindow):
             if self.current_input[1] == '×':
                 result = formulas.multiply([float(self.current_input[0]), float(self.current_input[2])])
                 print(result)
+            if self.current_input[1] == '÷':
+                result = formulas.divide([float(self.current_input[0]), float(self.current_input[2])])
+                print(result)
+            if self.current_input[1] == '+':
+                result = formulas.add([float(self.current_input[0]), float(self.current_input[2])])
+                print(result)
+            if self.current_input[1] == '-':
+                result = formulas.subtract([float(self.current_input[0]), float(self.current_input[2])])
+                print(result)
 
     def clear_input(self):
         """

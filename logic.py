@@ -1,4 +1,6 @@
 from PyQt6.QtWidgets import *
+
+import formulas
 from gui import *
 
 
@@ -14,6 +16,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         super().__init__()
         self.setupUi(self)
+        self.operators = ['×', '−', '+', '÷']
 
         # numbers
         self.push_one.clicked.connect(self.num_clicked)
@@ -37,7 +40,6 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.push_clear.clicked.connect(self.clear_input)
 
         self.current_input = []
-        self.total_input = []
 
     def num_clicked(self):
         """
@@ -49,18 +51,21 @@ class Logic(QMainWindow, Ui_MainWindow):
         if number.isdigit() or number == '.':
             self.push_clear.setText("C")
 
-        if number == '.':
-            if '.' not in self.current_input:
-                self.total_input.append(number)
+            if number == '.':
+                if '.' not in self.current_input:
+                    self.current_input.append(number)
+            else:
                 self.current_input.append(number)
-        else:
-            self.total_input.append(int(number))
-            self.current_input.append(int(number))
-            print('current', self.current_input)
-            print('total', self.total_input)
 
-        ans = "".join(map(str, self.total_input))
+            if any(op in self.current_input for op in self.operators):
+                return
+
+            if len(self.current_input) > 1:
+                self.current_input = [''.join(self.current_input)]
+
+        ans = "".join(map(str, self.current_input))
         self.ans_label.setText(ans)
+        print(self.current_input)
 
     def calculate(self):
         """
@@ -68,39 +73,45 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         button = self.sender()
         operation = button.text()
-        self.current_input = [operation]
+        if len(self.current_input) > 0:
+            self.current_input[0] = float(self.current_input[0])
+            if len(self.current_input) == 3:
+                self.current_input[2] = float(self.current_input[2])
 
-        if len(self.total_input) > 0:
-            if type(self.total_input[-1]) is int:
-                self.total_input.append(operation)
-                ans = "".join(map(str, self.total_input))
-                self.ans_label.setText(ans)
+            self.current_input.append(operation)
+            print(self.current_input)
 
     def submit(self):
         """
         A method that calculators an answer when the user clicks the equal button
         """
-        pass
+        if len(self.current_input) > 2:
+            result = 0
+            if self.current_input[1] == '×':
+                result = formulas.multiply([float(self.current_input[0]), float(self.current_input[2])])
+                print(result)
 
     def clear_input(self):
         """
         A method that clears the current input on the calculator screen
         """
-        operators = ['×', '−', '+', '÷']
-        has_operator = any(op in self.total_input for op in operators)
+        has_operator = any(op in self.current_input for op in self.operators)
 
         if not has_operator:
-            self.total_input = []
+            self.current_input = []
             self.ans_label.setText("")
-        elif type(self.total_input[-1]) is str:
-            self.total_input.pop()
-            ans = "".join(map(str, self.total_input))
+            self.push_clear.setText("A/C")
+        elif type(self.current_input[-1]) is str:
+            self.current_input.pop()
+            ans = "".join(map(str, self.current_input))
             self.ans_label.setText(ans)
+            print(self.current_input)
         else:
-            for i in reversed(self.total_input):
+            for i in reversed(self.current_input):
                 if type(i) is not str:
-                    self.total_input.pop()
+                    self.current_input.pop()
                 else:
                     break
-            ans = "".join(map(str, self.total_input))
+            ans = "".join(map(str, self.current_input))
             self.ans_label.setText(ans)
+            print(self.current_input)

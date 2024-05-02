@@ -1,4 +1,6 @@
 from PyQt6.QtWidgets import *
+
+import formulas
 from gui import *
 
 
@@ -59,12 +61,18 @@ class Logic(QMainWindow, Ui_MainWindow):
         operation = button.text()
         if len(self.current_input) > 0:
             self.current_input[0] = float(self.current_input[0])
+            if len(self.current_input) == 3:
+                self.current_input[2] = float(self.current_input[2])
 
             self.current_input.append(operation)
             print(self.current_input)
 
     def submit(self):
-        pass
+        if len(self.current_input) > 2:
+            result = 0
+            if self.current_input[1] == '×':
+                result = formulas.multiply([float(self.current_input[0]), float(self.current_input[2])])
+                print(result)
 
     def clear_input(self):
         has_operator = any(op in self.current_input for op in self.operators)

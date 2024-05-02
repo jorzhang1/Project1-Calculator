@@ -19,6 +19,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.operators = ['×', '−', '+', '÷']
 
         # numbers
+        self.push_zero.clicked.connect(self.num_clicked)
         self.push_one.clicked.connect(self.num_clicked)
         self.push_two.clicked.connect(self.num_clicked)
         self.push_three.clicked.connect(self.num_clicked)
@@ -82,16 +83,15 @@ class Logic(QMainWindow, Ui_MainWindow):
             result = 0
             if self.current_input[1] == '×':
                 result = formulas.multiply([float(self.current_input[0]), float(self.current_input[2])])
-                print(result)
-            if self.current_input[1] == '÷':
+            elif self.current_input[1] == '÷':
                 result = formulas.divide([float(self.current_input[0]), float(self.current_input[2])])
-                print(result)
-            if self.current_input[1] == '+':
+            elif self.current_input[1] == '+':
                 result = formulas.add([float(self.current_input[0]), float(self.current_input[2])])
-                print(result)
-            if self.current_input[1] == '-':
+            elif self.current_input[1] == '-':
                 result = formulas.subtract([float(self.current_input[0]), float(self.current_input[2])])
-                print(result)
+
+            self.current_input = [str(result)]
+            self.ans_label.setText(str(result))
 
     def clear_input(self):
         """

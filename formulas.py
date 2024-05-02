@@ -1,43 +1,31 @@
-import sys
-
-
 def add(values):
-    sum = 0
-    for i in values:
-        if i > 0:
-            sum += i
-    return sum
+    if values[0] == 0:
+        return values[-1]
+    elif values[-1] == 0:
+        return values[0]
+    else:
+        return values[0] + values[-1]
 
 
 def subtract(values):
-    new = [x for x in values if x > 0]
-    if len(new) > 0:
-        diff = new[0]
-        for i in new[1:]:
-            if i > 0:
-                diff -= i
-        return diff
+    if values[0] == 0:
+        return values[-1]
+    elif values[-1] == 0:
+        return values[0]
     else:
-        return 0
+        return values[0] - values[-1]
 
 
 def multiply(values):
-    new = [x for x in values if x != 0]
-    if len(new) > 0:
-        product = new[0]
-        for i in new[1:]:
-            if i != 0:
-                product *= i
-        return product
-    else:
+    if 0 in values:
         return 0
+    return values[0] * values[-1]
 
 
 def divide(values):
-    quotient = values[0]
-    for i in values[1:]:
-        if i == 0:
-            sys.exit('Cannot divide by 0')
-        else:
-            quotient /= i
-    return quotient
+    if values[-1] == 0:
+        raise ValueError
+    elif values[0] == 0:
+        return 0
+    else:
+        return values[0] / values[-1]

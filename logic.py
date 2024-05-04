@@ -67,10 +67,6 @@ class Logic(QMainWindow, Ui_MainWindow):
         button = self.sender()
         operation = button.text()
         if len(self.current_input) > 0:
-            self.current_input[0] = float(self.current_input[0])
-            if len(self.current_input) == 3:
-                self.current_input[2] = float(self.current_input[2])
-
             self.current_input.append(operation)
 
     def submit(self):

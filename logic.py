@@ -57,9 +57,8 @@ class Logic(QMainWindow, Ui_MainWindow):
             else:
                 self.current_input[-1] += number
 
-        ans = "".join(map(str, self.current_input))
+        ans = self.current_input[-1] if self.current_input else "0"
         self.ans_label.setText(ans)
-        print(self.current_input)
 
     def calculate(self):
         """
@@ -73,11 +72,10 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.current_input[2] = float(self.current_input[2])
 
             self.current_input.append(operation)
-            print(self.current_input)
 
     def submit(self):
         """
-        A method that calculators an answer when the user clicks the equal button
+        A method that calculates an answer when the user clicks the equal button
         """
         if len(self.current_input) > 2:
             result = 0
@@ -107,7 +105,6 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.current_input.pop()
             ans = "".join(map(str, self.current_input))
             self.ans_label.setText(ans)
-            print(self.current_input)
         else:
             for i in reversed(self.current_input):
                 if type(i) is not str:
@@ -116,4 +113,3 @@ class Logic(QMainWindow, Ui_MainWindow):
                     break
             ans = "".join(map(str, self.current_input))
             self.ans_label.setText(ans)
-            print(self.current_input)

@@ -59,7 +59,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             else:
                 self.current_input[-1] += number
 
-        ans = self.current_input[-1] if self.current_input else "0"
+        ans = self.current_input[-1]
         self.ans_label.setText(ans)
         print(self.current_input)
 
@@ -69,7 +69,8 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         button = self.sender()
         operation = button.text()
-        if len(self.current_input) > 0 and self.current_input[-1] != '.':
+        if len(self.current_input) > 0 and self.current_input[-1] != '.' and (self.current_input[-1]
+                                                                              not in self.operators):
             self.current_input.append(operation)
 
     def submit(self):
@@ -86,7 +87,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                     self.result = formulas.divide([float(self.current_input[0]), float(self.current_input[2])])
                 elif self.current_input[1] == '+':
                     self.result = formulas.add([float(self.current_input[0]), float(self.current_input[2])])
-                elif self.current_input[1] == '-':
+                elif self.current_input[1] == '−':
                     self.result = formulas.subtract([float(self.current_input[0]), float(self.current_input[2])])
 
                 self.current_input = [str(self.result)]

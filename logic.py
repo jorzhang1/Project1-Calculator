@@ -8,6 +8,7 @@ class Logic(QMainWindow, Ui_MainWindow):
     """
     A class that connects the calculator UI to code
     """
+    result = None
 
     def __init__(self):
         """
@@ -52,13 +53,15 @@ class Logic(QMainWindow, Ui_MainWindow):
         if number.isdigit() or number == '.':
             self.push_clear.setText("C")
 
-            if not self.current_input or self.current_input[-1] in self.operators:
+            if ((not self.current_input or self.current_input[-1] in self.operators) or
+                    self.current_input == self.result):
                 self.current_input.append(number)
             else:
                 self.current_input[-1] += number
 
         ans = self.current_input[-1] if self.current_input else "0"
         self.ans_label.setText(ans)
+        print(self.current_input)
 
     def calculate(self):
         """
@@ -66,26 +69,31 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         button = self.sender()
         operation = button.text()
-        if len(self.current_input) > 0:
+        if len(self.current_input) > 0 and self.current_input[-1] != '.':
             self.current_input.append(operation)
 
     def submit(self):
         """
         A method that calculates an answer when the user clicks the equal button
         """
-        if len(self.current_input) > 2:
-            result = 0
-            if self.current_input[1] == '×':
-                result = formulas.multiply([float(self.current_input[0]), float(self.current_input[2])])
-            elif self.current_input[1] == '÷':
-                result = formulas.divide([float(self.current_input[0]), float(self.current_input[2])])
-            elif self.current_input[1] == '+':
-                result = formulas.add([float(self.current_input[0]), float(self.current_input[2])])
-            elif self.current_input[1] == '-':
-                result = formulas.subtract([float(self.current_input[0]), float(self.current_input[2])])
 
-            self.current_input = [str(result)]
-            self.ans_label.setText(str(result))
+        try:
+            if len(self.current_input) > 2:
+                self.result = 0
+                if self.current_input[1] == '×':
+                    self.result = formulas.multiply([float(self.current_input[0]), float(self.current_input[2])])
+                elif self.current_input[1] == '÷':
+                    self.result = formulas.divide([float(self.current_input[0]), float(self.current_input[2])])
+                elif self.current_input[1] == '+':
+                    self.result = formulas.add([float(self.current_input[0]), float(self.current_input[2])])
+                elif self.current_input[1] == '-':
+                    self.result = formulas.subtract([float(self.current_input[0]), float(self.current_input[2])])
+
+                self.current_input = [str(self.result)]
+                self.ans_label.setText(str(self.result))
+                print(self.current_input)
+        except ValueError:
+            print('Must enter a number')
 
     def clear_input(self):
         """

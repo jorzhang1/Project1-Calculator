@@ -9,7 +9,7 @@ def add(values):
 
 def subtract(values):
     if values[0] == 0:
-        return -values[-1]
+        return -(values[-1])
     elif values[-1] == 0:
         return values[0]
     else:

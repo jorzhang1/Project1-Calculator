@@ -71,7 +71,12 @@ class Logic(QMainWindow, Ui_MainWindow):
         operation = button.text()
         if len(self.current_input) > 0 and self.current_input[-1] != '.' and (self.current_input[-1]
                                                                               not in self.operators):
-            self.current_input.append(operation)
+            has_operator = any(op in self.current_input for op in self.operators)
+            if has_operator:
+                self.submit()
+                self.current_input.append(operation)
+            else:
+                self.current_input.append(operation)
 
     def submit(self):
         """

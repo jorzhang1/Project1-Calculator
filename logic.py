@@ -38,6 +38,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.push_minus.clicked.connect(self.calculate)
         self.push_add.clicked.connect(self.calculate)
 
+        self.push_negative.clicked.connect(self.negative)
         self.push_submit.clicked.connect(self.submit)
         self.push_clear.clicked.connect(self.clear_input)
 
@@ -62,6 +63,22 @@ class Logic(QMainWindow, Ui_MainWindow):
         ans = self.current_input[-1]
         self.ans_label.setText(ans)
         print(self.current_input)
+
+    def negative(self):
+        """
+        A method that adds a negative sign to the input
+        """
+        if not self.current_input:
+            self.current_input.append('-')
+        elif self.current_input[-1] in self.operators:
+            self.current_input.append('-')
+        elif '-' not in self.current_input[-1]:
+            self.current_input[-1] = '-' + self.current_input[-1]
+        else:
+            self.current_input[-1] = self.current_input[-1][1:]
+
+        ans = self.current_input[-1]
+        self.ans_label.setText(ans)
 
     def calculate(self):
         """

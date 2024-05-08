@@ -48,7 +48,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         A method that reads input when the user clicks a number
         """
-        self.ans_label.setStyleSheet("color: black;")
+        self.ans_label.setStyleSheet("color: grey;")
         button = self.sender()
         number = button.text()
 

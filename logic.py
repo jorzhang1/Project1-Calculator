@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import *
-
+import csv
 import formulas
 from gui import *
 
@@ -8,7 +8,6 @@ class Logic(QMainWindow, Ui_MainWindow):
     """
     A class that connects the calculator UI to code
     """
-    result = None
 
     def __init__(self):
         """
@@ -46,6 +45,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.push_submit.clicked.connect(self.submit)
         self.push_clear.clicked.connect(self.clear_input)
 
+        self.result = None
         self.current_input = []
 
     def num_clicked(self):
@@ -171,4 +171,14 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.expanded = True
             self.historyLabel.setEnabled(True)
             self.historyLabel.setGeometry(QtCore.QRect(650, 50, 60, 16))
-            self.historyLabel.setText("Test")
+
+    def write_history(self):
+        try:
+            with open('history.csv', 'w', newline='') as history_file:
+                contents = csv.writer(history_file)
+                contents.writerow([self.current_input[0], self.current_input[1], self.current_input[2], self.result])
+                print('hi')
+        except IndexError:
+            self.historyLabel.setText('')
+
+

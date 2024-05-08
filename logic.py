@@ -134,6 +134,7 @@ class Logic(QMainWindow, Ui_MainWindow):
 
                 self.current_input = [str(self.result)]
                 self.ans_label.setText(str(self.result))
+                self.write_history()
                 print(self.current_input)
         except ValueError:
             self.ans_label.setText("Cannot divide by 0")
@@ -176,11 +177,13 @@ class Logic(QMainWindow, Ui_MainWindow):
 
     def write_history(self):
         try:
-            with open('history.csv', 'w', newline='') as history_file:
+            with open('history.csv', 'a', newline='') as history_file:
                 contents = csv.writer(history_file)
                 contents.writerow([self.current_input[0], self.current_input[1], self.current_input[2], self.result])
-                print('hi')
-        except IndexError:
-            self.historyLabel.setText('')
+                print('Write successful:',
+                      [self.current_input[0], self.current_input[1], self.current_input[2], self.result])
+        except Exception as e:
+            print('Error writing to history:', e)
+
 
 

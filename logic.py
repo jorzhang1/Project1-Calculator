@@ -19,6 +19,9 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.operators = ['×', '−', '+', '÷']
 
+        self.historyButton.clicked.connect(self.history)
+        self.expanded = False
+
         # numbers
         self.push_zero.clicked.connect(self.num_clicked)
         self.push_one.clicked.connect(self.num_clicked)
@@ -149,3 +152,11 @@ class Logic(QMainWindow, Ui_MainWindow):
                     break
             ans = "".join(map(str, self.current_input))
             self.ans_label.setText(ans)
+
+    def history(self):
+        if self.expanded:
+            self.setFixedWidth(580)
+            self.expanded = False
+        else:
+            self.setFixedWidth(900)
+            self.expanded = True

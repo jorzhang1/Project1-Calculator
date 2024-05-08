@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '.\calculator.ui'
+# Form implementation generated from reading ui file 'calculator.ui'
 #
 # Created by: PyQt6 UI code generator 6.7.0
 #
@@ -149,12 +149,15 @@ class Ui_MainWindow(object):
         self.logo.setStyleSheet("background-image:url(:/uno/logo_uno.png)\n"
 "")
         self.logo.setText("")
-        self.logo.setPixmap(QtGui.QPixmap("logo_uno.png"))
+        self.logo.setPixmap(QtGui.QPixmap(":/uno/logo_uno.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
+        self.historyButton = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.historyButton.setGeometry(QtCore.QRect(460, 10, 113, 32))
+        self.historyButton.setObjectName("historyButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 580, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 580, 36))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(parent=MainWindow)
@@ -187,6 +190,7 @@ class Ui_MainWindow(object):
         self.push_clear.setText(_translate("MainWindow", "A/C"))
         self.push_negative.setText(_translate("MainWindow", "+/-"))
         self.push_percentage.setText(_translate("MainWindow", "%"))
+        self.historyButton.setText(_translate("MainWindow", "History"))
 
 
 if __name__ == "__main__":

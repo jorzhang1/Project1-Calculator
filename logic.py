@@ -65,10 +65,8 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.current_input[-1] += number
                 print(self.current_input)
             elif ((not self.current_input or self.current_input[-1] in self.operators) or
-                    self.current_input == self.result):
+                  self.current_input == self.result):
                 self.current_input.append(number)
-
-
 
         ans = self.current_input[-1]
         self.ans_label.setText(ans)

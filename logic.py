@@ -48,11 +48,16 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         A method that reads input when the user clicks a number
         """
+        self.ans_label.setStyleSheet("color: black;")
         button = self.sender()
         number = button.text()
 
         if number.isdigit() or number == '.':
             self.push_clear.setText("C")
+
+            if self.current_input and '.' in self.current_input[-1]:
+                if number == '.':
+                    return
 
             if ((not self.current_input or self.current_input[-1] in self.operators) or
                     self.current_input == self.result):
@@ -60,7 +65,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             else:
                 self.current_input[-1] += number
 
-        ans = self.current_input[-1]
+        ans = self.current_input[-1] if self.current_input else number
         self.ans_label.setText(ans)
         print(self.current_input)
 
@@ -99,7 +104,6 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         A method that calculates an answer when the user clicks the equal button
         """
-
         try:
             if len(self.current_input) > 2:
                 self.result = 0
@@ -116,7 +120,10 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.ans_label.setText(str(self.result))
                 print(self.current_input)
         except ValueError:
-            print('Must enter a number')
+            self.ans_label.setText("Cannot divide by 0")
+            self.ans_label.setStyleSheet("color: red;")
+            self.current_input = []
+
 
     def clear_input(self):
         """

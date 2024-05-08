@@ -183,7 +183,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 print('Write successful:',
                       [self.current_input[0], self.current_input[1], self.current_input[2], self.result])
         except Exception as e:
-            print('Error writing to history:', e)
+            print('Error:', e)
 
 
 

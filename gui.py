@@ -187,7 +187,7 @@ class Ui_MainWindow(object):
         self.push_three.setText(_translate("MainWindow", "3"))
         self.push_divide.setText(_translate("MainWindow", "÷"))
         self.push_multiply.setText(_translate("MainWindow", "×"))
-        self.push_minus.setText(_translate("MainWindow", "−"))
+        self.push_minus.setText(_translate("MainWindow", "-"))
         self.push_add.setText(_translate("MainWindow", "+"))
         self.push_zero.setText(_translate("MainWindow", "0"))
         self.push_decimal.setText(_translate("MainWindow", "."))

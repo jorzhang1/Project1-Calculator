@@ -16,7 +16,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         super().__init__()
         self.setupUi(self)
-        self.operators = ['×', '−', '+', '÷']
+        self.operators = ['×', '-', '+', '÷']
 
         self.historyButton.clicked.connect(self.history)
         self.expanded = False
@@ -45,7 +45,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.push_submit.clicked.connect(self.submit)
         self.push_clear.clicked.connect(self.clear_input)
 
-        self.result = None
+        self.result = 0
         self.current_input = []
 
     def num_clicked(self):
@@ -121,21 +121,20 @@ class Logic(QMainWindow, Ui_MainWindow):
         A method that calculates an answer when the user clicks the equal button
         """
         try:
-            if len(self.current_input) > 2:
-                self.result = 0
+            if len(self.current_input) >= 3:
                 if self.current_input[1] == '×':
                     self.result = formulas.multiply([float(self.current_input[0]), float(self.current_input[2])])
                 elif self.current_input[1] == '÷':
                     self.result = formulas.divide([float(self.current_input[0]), float(self.current_input[2])])
                 elif self.current_input[1] == '+':
                     self.result = formulas.add([float(self.current_input[0]), float(self.current_input[2])])
-                elif self.current_input[1] == '−':
+                elif self.current_input[1] == '-':
                     self.result = formulas.subtract([float(self.current_input[0]), float(self.current_input[2])])
 
+                self.write_history()
                 self.current_input = [str(self.result)]
                 self.ans_label.setText(str(self.result))
-                self.write_history()
-                print(self.current_input)
+
         except ValueError:
             self.ans_label.setText("Cannot divide by 0")
             self.ans_label.setStyleSheet("color: red;")
@@ -173,7 +172,20 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.setFixedWidth(900)
             self.expanded = True
             self.historyLabel.setEnabled(True)
-            self.historyLabel.setGeometry(QtCore.QRect(650, 50, 60, 16))
+            self.historyLabel.setGeometry(QtCore.QRect(650, 50, 200, 300))
+
+        label = ''
+        try:
+            with open('history.csv', 'r') as history_file:
+                reader = csv.reader(history_file)
+                history_data = list(reader)
+                for row in history_data:
+                    label += str(f"{row[0]} {row[1]} {row[2]} = {row[3]}\n")
+                self.historyLabel.setText(label)
+
+        except FileNotFoundError:
+            print('hi')
+            self.historyLabel.setText("There's not history yet")
 
     def write_history(self):
         try:
@@ -184,6 +196,3 @@ class Logic(QMainWindow, Ui_MainWindow):
                       [self.current_input[0], self.current_input[1], self.current_input[2], self.result])
         except Exception as e:
             print('Error writing to history:', e)
-
-
-

@@ -42,6 +42,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.push_add.clicked.connect(self.calculate)
 
         self.push_negative.clicked.connect(self.negative)
+        self.push_percentage.clicked.connect(self.percentage)
         self.push_submit.clicked.connect(self.submit)
         self.push_clear.clicked.connect(self.clear_input)
 
@@ -90,6 +91,16 @@ class Logic(QMainWindow, Ui_MainWindow):
 
         ans = self.current_input[-1]
         self.ans_label.setText(ans)
+
+    def percentage(self):
+        """
+        Method to change input into percentage
+        """
+        if self.current_input and self.current_input[-1].isdigit():
+            num = float(self.current_input[-1])
+            num /= 100
+            self.current_input[-1] = str(num)
+            self.ans_label.setText(self.current_input[-1])
 
     def calculate(self):
         """

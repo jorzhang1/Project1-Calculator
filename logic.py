@@ -48,7 +48,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         A method that reads input when the user clicks a number
         """
-        self.ans_label.setStyleSheet("color: black;")
+        self.ans_label.setStyleSheet("color: grey;")
         button = self.sender()
         number = button.text()
 
@@ -126,7 +126,6 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.ans_label.setText("Cannot divide by 0")
             self.ans_label.setStyleSheet("color: red;")
             self.current_input = []
-
 
     def clear_input(self):
         """

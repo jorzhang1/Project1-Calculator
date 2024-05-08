@@ -168,6 +168,10 @@ class Logic(QMainWindow, Ui_MainWindow):
         if self.expanded:
             self.setFixedWidth(580)
             self.expanded = False
+            self.historyLabel.setEnabled(False)
         else:
             self.setFixedWidth(900)
             self.expanded = True
+            self.historyLabel.setEnabled(True)
+            self.historyLabel.setGeometry(QtCore.QRect(650, 50, 60, 16))
+            self.historyLabel.setText("Test")

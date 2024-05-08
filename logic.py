@@ -93,11 +93,13 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         Method to change input into percentage
         """
-        if self.current_input and self.current_input[-1].isdigit():
-            num = float(self.current_input[-1])
-            num /= 100
-            self.current_input[-1] = str(num)
-            self.ans_label.setText(self.current_input[-1])
+        if self.current_input:
+            last_input = self.current_input[-1]
+            if last_input.lstrip('-').replace('.', '', 1).isdigit():
+                num = float(last_input)
+                num /= 100
+                self.current_input[-1] = str(num)
+                self.ans_label.setText(self.current_input[-1])
 
     def calculate(self):
         """

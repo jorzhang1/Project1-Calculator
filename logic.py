@@ -56,25 +56,22 @@ class Logic(QMainWindow, Ui_MainWindow):
         button = self.sender()
         number = button.text()
 
-        if number.isdigit():
+        if number.isdigit() or number == '.':
             self.push_clear.setText("C")
+
+            if self.current_input and '.' in self.current_input[-1]:
+                if number == '.':
+                    return
+
             if ((not self.current_input or self.current_input[-1] in self.operators) or
                     self.current_input == self.result):
                 self.current_input.append(number)
             else:
                 self.current_input[-1] += number
-                print(self.current_input)
-        elif number == '.':
-            self.push_clear.setText("C")
-            if '.' not in self.current_input[-1]:
-                self.current_input[-1] += number
-                print(self.current_input)
-            elif ((not self.current_input or self.current_input[-1] in self.operators) or
-                  self.current_input == self.result):
-                self.current_input.append(number)
 
-        ans = self.current_input[-1]
+        ans = self.current_input[-1] if self.current_input else number
         self.ans_label.setText(ans)
+        print(self.current_input)
 
     def negative(self):
         """

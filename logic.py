@@ -173,7 +173,6 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.setFixedWidth(900)
             self.expanded = True
             self.historyLabel.setEnabled(True)
-            self.historyLabel.setGeometry(QtCore.QRect(650, 50, 200, 300))
 
         label = ''
         try:

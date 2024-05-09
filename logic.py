@@ -77,16 +77,15 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         A method that adds a negative sign to the input
         """
-        if not self.current_input:
-            self.current_input.append('-')
-        elif self.current_input[-1] in self.operators:
-            self.current_input.append('-')
-        elif '-' not in self.current_input[-1]:
-            self.current_input[-1] = '-' + self.current_input[-1]
-        else:
-            self.current_input[-1] = self.current_input[-1][1:]
+        if self.current_input:
+            if self.current_input[-1] in self.operators:
+                return
+            if '-' in self.current_input[-1]:
+                self.current_input[-1] = self.current_input[-1][1:]
+            else:
+                self.current_input[-1] = '-' + self.current_input[-1]
 
-        ans = self.current_input[-1]
+        ans = self.current_input[-1] if self.current_input else ""
         self.ans_label.setText(ans)
 
     def percentage(self):

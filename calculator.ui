@@ -411,14 +411,13 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image:url(:/uno/logo_uno.png)
-</string>
+     <string notr="true">background-image:url(:/uno/logo_uno.png)</string>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>:/uno/logo_uno.png</pixmap>
+     <pixmap resource="../../Downloads/logo.qrc">:/uno/logo_uno.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -460,7 +459,7 @@
      <x>0</x>
      <y>0</y>
      <width>580</width>
-     <height>36</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

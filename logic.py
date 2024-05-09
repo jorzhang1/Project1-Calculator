@@ -131,6 +131,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 elif self.current_input[1] == '-':
                     self.result = formulas.subtract([float(self.current_input[0]), float(self.current_input[2])])
 
+                self.result = round(self.result, 2)
                 self.write_history()
                 self.current_input = [str(self.result)]
                 self.ans_label.setText(str(self.result))
@@ -180,8 +181,9 @@ class Logic(QMainWindow, Ui_MainWindow):
                 reader = csv.reader(history_file)
                 history_data = list(reader)
                 for row in history_data:
-                    label += str(f"{row[0]} {row[1]} {row[2]} = {row[3]}\n")
+                    label +=  str(f"<p style='margin-bottom: 10px;'>{row[0]} {row[1]} {row[2]} = {row[3]}\n</p>")
                 self.historyLabel.setText(label)
+                self.historyLabel.setStyleSheet("font-size: 12pt;")
 
         except FileNotFoundError:
             print('hi')

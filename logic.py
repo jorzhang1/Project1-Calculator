@@ -107,13 +107,11 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         button = self.sender()
         operation = button.text()
-        if len(self.current_input) > 0 and self.current_input[-1] != '.' and (self.current_input[-1]
-                                                                              not in self.operators):
-            has_operator = any(op in self.current_input for op in self.operators)
-            if has_operator:
-                self.submit()
+        if self.current_input:
+            if len(self.current_input) < 2:
                 self.current_input.append(operation)
-            else:
+            elif len(self.current_input) > 1 and self.current_input[-1] in self.operators:
+                self.current_input.pop()
                 self.current_input.append(operation)
 
     def submit(self):
@@ -121,7 +119,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         A method that calculates an answer when the user clicks the equal button
         """
         try:
-            if len(self.current_input) >= 3:
+            if len(self.current_input) == 3:
                 num1 = Decimal(self.current_input[0])
                 num2 = Decimal(self.current_input[2])
                 operator = self.current_input[1]
@@ -148,24 +146,13 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         A method that clears the current input on the calculator screen
         """
-        has_operator = any(op in self.current_input for op in self.operators)
-
-        if not has_operator:
-            self.current_input = []
+        if self.current_input:
+            if len(self.current_input) == 3:
+                self.current_input.pop()
+            else:
+                self.current_input = []
             self.ans_label.setText("")
             self.push_clear.setText("A/C")
-        elif type(self.current_input[-1]) is str:
-            self.current_input.pop()
-            ans = "".join(map(str, self.current_input))
-            self.ans_label.setText(ans)
-        else:
-            for i in reversed(self.current_input):
-                if type(i) is not str:
-                    self.current_input.pop()
-                else:
-                    break
-            ans = "".join(map(str, self.current_input))
-            self.ans_label.setText(ans)
 
     def history(self):
         if self.expanded:
@@ -183,7 +170,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 reader = csv.reader(history_file)
                 history_data = list(reader)
                 for row in history_data:
-                    label +=  str(f"<p style='margin-bottom: 10px;'>{row[0]} {row[1]} {row[2]} = {row[3]}\n</p>")
+                    label += str(f"<p style='margin-bottom: 10px;'>{row[0]} {row[1]} {row[2]} = {row[3]}\n</p>")
                 self.historyLabel.setText(label)
                 self.historyLabel.setStyleSheet("font-size: 12pt;")
 

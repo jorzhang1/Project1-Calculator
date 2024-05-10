@@ -75,7 +75,10 @@ class Logic(QMainWindow, Ui_MainWindow):
                     self.current_input[-1] += number
 
             else:
-                self.current_input.append(number)
+                if number == '.':
+                    self.current_input.append("0.")
+                else:
+                    self.current_input.append(number)
 
         ans = self.current_input[-1] if self.current_input else number
         self.ans_label.setText(ans)

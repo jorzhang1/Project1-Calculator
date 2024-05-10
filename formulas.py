@@ -24,7 +24,7 @@ def multiply(values):
 
 def divide(values):
     if values[-1] == 0:
-        raise ValueError
+        raise ValueError("Cannot divide by 0")
     elif values[0] == 0:
         return 0
     else:

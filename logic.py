@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import *
+from decimal import Decimal
 import csv
 import formulas
 from gui import *
@@ -95,8 +96,8 @@ class Logic(QMainWindow, Ui_MainWindow):
         if self.current_input:
             last_input = self.current_input[-1]
             if last_input.lstrip('-').replace('.', '', 1).isdigit():
-                num = float(last_input)
-                num /= 100
+                num = Decimal(last_input)
+                num /= Decimal('100')
                 self.current_input[-1] = str(num)
                 self.ans_label.setText(self.current_input[-1])
 
@@ -121,22 +122,25 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         try:
             if len(self.current_input) >= 3:
-                if self.current_input[1] == '×':
-                    self.result = formulas.multiply([float(self.current_input[0]), float(self.current_input[2])])
-                elif self.current_input[1] == '÷':
-                    self.result = formulas.divide([float(self.current_input[0]), float(self.current_input[2])])
-                elif self.current_input[1] == '+':
-                    self.result = formulas.add([float(self.current_input[0]), float(self.current_input[2])])
-                elif self.current_input[1] == '-':
-                    self.result = formulas.subtract([float(self.current_input[0]), float(self.current_input[2])])
+                num1 = Decimal(self.current_input[0])
+                num2 = Decimal(self.current_input[2])
+                operator = self.current_input[1]
 
-                self.result = round(self.result, 2)
+                if operator == '×':
+                    self.result = formulas.multiply([num1, num2])
+                elif operator == '÷':
+                    self.result = formulas.divide([num1, num2])
+                elif operator == '+':
+                    self.result = formulas.add([num1, num2])
+                elif operator == '-':
+                    self.result = formulas.subtract([num1, num2])
+
                 self.write_history()
                 self.current_input = [str(self.result)]
                 self.ans_label.setText(str(self.result))
 
-        except ValueError:
-            self.ans_label.setText("Cannot divide by 0")
+        except ValueError as e:
+            self.ans_label.setText(str(e))
             self.ans_label.setStyleSheet("color: red;")
             self.current_input = []
 

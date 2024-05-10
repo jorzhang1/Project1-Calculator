@@ -10,17 +10,17 @@ class Logic(QMainWindow, Ui_MainWindow):
     A class that connects the calculator UI to code
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         A method that sets up the calculator UI
         and connects the buttons to code
         """
         super().__init__()
         self.setupUi(self)
-        self.operators = ['×', '-', '+', '÷']
+        self.operators: list[str] = ['×', '-', '+', '÷']
 
         self.historyButton.clicked.connect(self.history)
-        self.expanded = False
+        self.expanded: bool = False
 
         # numbers
         self.push_zero.clicked.connect(self.num_clicked)
@@ -46,10 +46,10 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.push_submit.clicked.connect(self.submit)
         self.push_clear.clicked.connect(self.clear_input)
 
-        self.result = 0
-        self.current_input = []
+        self.result: Decimal = Decimal(0)
+        self.current_input: list[str] = []
 
-    def num_clicked(self):
+    def num_clicked(self) -> None:
         """
         A method that reads input when the user clicks a number
         """
@@ -84,28 +84,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.ans_label.setText(ans)
         print(self.current_input)
 
-        """
-        if number.isdigit() or number == '.':
-            self.push_clear.setText("C")
-            
-            if self.current_input
-                if len(self.current_input) < 2 and '.' in self.current_input[-1]:
-                    if number == '.':
-                        return
-                elif self.current_input[-1] in self.operators:
-                    return
-                else:
-                    self.current_input.append(number)
-            else:
-                self.current_input[-1] += number
-            
-                
-                
-            
-        
-        """
-
-    def negative(self):
+    def negative(self) -> None:
         """
         A method that adds a negative sign to the input
         """
@@ -120,7 +99,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         ans = self.current_input[-1] if self.current_input else ""
         self.ans_label.setText(ans)
 
-    def percentage(self):
+    def percentage(self) -> None:
         """
         Method to change input into percentage
         """
@@ -132,7 +111,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.current_input[-1] = str(num)
                 self.ans_label.setText(self.current_input[-1])
 
-    def calculate(self):
+    def calculate(self) -> None:
         """
         A method that reads input when the user clicks an operation
         """
@@ -148,7 +127,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.submit()
         print(self.current_input)
 
-    def submit(self):
+    def submit(self) -> None:
         """
         A method that calculates an answer when the user clicks the equal button
         """
@@ -177,7 +156,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.current_input = []
             print(self.current_input)
 
-    def clear_input(self):
+    def clear_input(self) -> None:
         """
         A method that clears the current input on the calculator screen
         """
@@ -189,7 +168,10 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.ans_label.setText("")
             self.push_clear.setText("A/C")
 
-    def history(self):
+    def history(self) -> None:
+        """
+        Method to expand window to display csv file
+        """
         if self.expanded:
             self.setFixedWidth(580)
             self.expanded = False
@@ -213,7 +195,10 @@ class Logic(QMainWindow, Ui_MainWindow):
             print('hi')
             self.historyLabel.setText("There's not history yet")
 
-    def write_history(self):
+    def write_history(self) -> None:
+        """
+        Method to write calculations into csv
+        """
         try:
             with open('history.csv', 'a', newline='') as history_file:
                 contents = csv.writer(history_file)

@@ -60,19 +60,47 @@ class Logic(QMainWindow, Ui_MainWindow):
         if number.isdigit() or number == '.':
             self.push_clear.setText("C")
 
-            if self.current_input and '.' in self.current_input[-1]:
-                if number == '.':
-                    return
+            if self.current_input:
+                if '.' in self.current_input[-1]:
+                    if number == '.':
+                        return
+                    else:
+                        self.current_input[-1] += number
+                elif self.current_input[-1] in self.operators:
+                    if number == '.':
+                        return
+                    else:
+                        self.current_input.append(number)
+                else:
+                    self.current_input[-1] += number
 
-            if ((not self.current_input or self.current_input[-1] in self.operators) or
-                    self.current_input == self.result):
-                self.current_input.append(number)
             else:
-                self.current_input[-1] += number
+                self.current_input.append(number)
 
         ans = self.current_input[-1] if self.current_input else number
         self.ans_label.setText(ans)
         print(self.current_input)
+
+        """
+        if number.isdigit() or number == '.':
+            self.push_clear.setText("C")
+            
+            if self.current_input
+                if len(self.current_input) < 2 and '.' in self.current_input[-1]:
+                    if number == '.':
+                        return
+                elif self.current_input[-1] in self.operators:
+                    return
+                else:
+                    self.current_input.append(number)
+            else:
+                self.current_input[-1] += number
+            
+                
+                
+            
+        
+        """
 
     def negative(self):
         """

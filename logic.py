@@ -113,6 +113,9 @@ class Logic(QMainWindow, Ui_MainWindow):
             elif len(self.current_input) > 1 and self.current_input[-1] in self.operators:
                 self.current_input.pop()
                 self.current_input.append(operation)
+            else:
+                self.submit()
+                self.current_input.append(operation)
 
     def submit(self):
         """

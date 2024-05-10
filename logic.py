@@ -143,7 +143,7 @@ class Logic(QMainWindow, Ui_MainWindow):
                 self.current_input.append(operation)
             else:
                 self.submit()
-                self.current_input.append(operation)
+        print(self.current_input)
 
     def submit(self):
         """
@@ -172,6 +172,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             self.ans_label.setText(str(e))
             self.ans_label.setStyleSheet("color: red;")
             self.current_input = []
+            print(self.current_input)
 
     def clear_input(self):
         """

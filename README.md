@@ -1,10 +1,5 @@
-Todo:
+Description:
 
-1. Make it so you can add a decimal for all numbers
-2. Add special functionality to app
-3. input data validation
-4. storage of data
-5. type hinting and docstrings
-6. application window should be non-resizable
-7. exception handling
-8. OOP best practices
+This is a personal calculator app that has all the functionality of a regular calculator, as well as a special addition being a history list. The buttons it has are clear, switch sign, percent, divide, multiply, subtract, add, equal, decimal, and the numbers 0-9. It can handle negative numbers and decimal numbers.
+
+Made by Eduardo Perez and Jordan Zhang

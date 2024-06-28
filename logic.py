@@ -118,13 +118,15 @@ class Logic(QMainWindow, Ui_MainWindow):
         button = self.sender()
         operation = button.text()
         if self.current_input:
-            if len(self.current_input) < 2:
+            if len(self.current_input) == 1:
                 self.current_input.append(operation)
-            elif len(self.current_input) > 1 and self.current_input[-1] in self.operators:
+            elif len(self.current_input) == 2 and self.current_input[-1] in self.operators:
                 self.current_input.pop()
                 self.current_input.append(operation)
             else:
                 self.submit()
+                if self.current_input:
+                    self.current_input.append(operation)
         print(self.current_input)
 
     def submit(self) -> None:
